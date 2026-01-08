@@ -1,26 +1,119 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-orbitron);
+  --font-display: var(--font-orbitron);
+
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar: hsl(var(--sidebar));
+
+  --color-ring: hsl(var(--ring));
+  --color-input: hsl(var(--input));
+  --color-border: hsl(var(--border));
+  --color-destructive: hsl(var(--destructive));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card: hsl(var(--card));
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.5rem;
+
+  /* STRICT USER PALETTE IMPLEMENTATION */
+
+  /* Background: #000000 */
+  --background: 0 0% 0%;
+
+  /* Foreground: #ffffff */
+  --foreground: 0 0% 100%;
+
+  /* Card: #050505 (Subtle lift from black) */
+  --card: 0 0% 2%;
+  --card-foreground: 0 0% 100%;
+
+  /* Popover: Match card */
+  --popover: 0 0% 2%;
+  --popover-foreground: 0 0% 100%;
+
+  /* Primary: #c5003c (Crimson) */
+  --primary: 342 100% 39%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary: #880425 (Darker Red) */
+  --secondary: 345 94% 27%;
+  --secondary-foreground: 0 0% 100%;
+
+  /* Muted: #1a1a1a (Neutral Dark Gray for balance) */
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 60%;
+
+  /* Accent: #f3e600 (Yellow) */
+  --accent: 57 100% 48%;
+  --accent-foreground: 0 0% 0%;
+
+  /* Destructive: #880425 (Reusing Dark Red) or Standard Red */
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Border: #262626 (Neutral Gray) */
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+
+  /* Ring: #55ead4 (Cyan) */
+  --ring: 171 76% 63%;
+
+  /* Sidebar defaults */
+  --sidebar: 0 0% 2%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-primary: 342 100% 39%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 57 100% 48%;
+  --sidebar-accent-foreground: 0 0% 0%;
+  --sidebar-border: 0 0% 15%;
+  --sidebar-ring: 171 76% 63%;
+}
+
+/* Enforce dark mode by default, no light mode overrides */
+.dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
 }
