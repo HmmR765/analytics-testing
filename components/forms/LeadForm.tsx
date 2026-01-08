@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { NeonButton } from "@/components/cyberpunk/NeonButton";
 
-import { trackEvent } from "@/lib/tracking";
+import { trackEvent, pushFormSuccessToDataLayer } from "@/lib/tracking";
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -45,6 +45,10 @@ export function LeadForm() {
                 email_hash: values.email, // In real app, hash this!
                 phone_hash: values.phone
             }
+        });
+        pushFormSuccessToDataLayer({
+            form_id: 'lead_gen_v1',
+            form_name: 'Lead Generation'
         });
         alert("Lead Submitted! Check Console or Tracking Debugger.");
     }

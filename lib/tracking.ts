@@ -12,6 +12,7 @@ export type TrackEventName =
     | "file_download"
     | "view_promotion"
     | "select_promotion"
+    | "form_success"
     | "custom_event";
 
 interface TrackingPayload {
@@ -39,6 +40,34 @@ export const trackEvent = (event: TrackEventName, payload: TrackingPayload = {})
 
         console.log(`[TRACKING]: ${event}`, payload);
     }
+};
+
+interface FormSuccessPayload {
+    form_id: string;
+    form_name?: string;
+}
+
+export const pushFormSuccessToDataLayer = (payload: FormSuccessPayload) => {
+    if (typeof window === 'undefined') return;
+
+    window.dataLayer = window.dataLayer || [];
+    const eventData = {
+        event: 'form_success',
+        form_id: payload.form_id,
+        form_name: payload.form_name,
+        page_path: window.location.pathname,
+        method: 'ajax',
+        error: false,
+        timestamp: new Date().toISOString(),
+    };
+
+    window.dataLayer.push(eventData);
+
+    // Also dispatch for the debugger
+    const debugEvent = new CustomEvent("tracking-event", { detail: eventData });
+    window.dispatchEvent(debugEvent);
+
+    console.log(`[TRACKING]: form_success`, eventData);
 };
 
 // Global declaration for TS

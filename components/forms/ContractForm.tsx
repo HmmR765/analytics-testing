@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { NeonButton } from "@/components/cyberpunk/NeonButton";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
+import { pushFormSuccessToDataLayer } from "@/lib/tracking";
 
 const formSchema = z.object({
     codename: z.string().min(2, { message: "Alias required." }),
@@ -36,6 +37,10 @@ export function ContractForm() {
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Redirect to Thank You page with query params to simulate processing
         const contractId = "CNT-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+        pushFormSuccessToDataLayer({
+            form_id: 'contract_request',
+            form_name: 'Contract Request'
+        });
         router.push(`/thank-you?type=contract&id=${contractId}`);
     }
 

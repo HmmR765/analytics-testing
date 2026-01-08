@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { NeonButton } from "@/components/cyberpunk/NeonButton";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { trackEvent } from "@/lib/tracking";
+import { trackEvent, pushFormSuccessToDataLayer } from "@/lib/tracking";
 import { useRouter } from "next/navigation";
 
 const QUESTIONS = [
@@ -53,6 +53,10 @@ export function TypeformComponent() {
             trackEvent("generate_lead", {
                 form_name: "customer_survey",
                 value: 0,
+            });
+            pushFormSuccessToDataLayer({
+                form_id: 'customer_survey',
+                form_name: 'Customer Survey'
             });
             router.push("/thank-you?type=contract&id=SURVEY-" + Math.random().toString().slice(2, 8));
         }

@@ -5,7 +5,7 @@ import { NeonButton } from "@/components/cyberpunk/NeonButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { trackEvent } from "@/lib/tracking";
+import { trackEvent, pushFormSuccessToDataLayer } from "@/lib/tracking";
 import { useRouter } from "next/navigation";
 
 export function WizardComponent() {
@@ -26,6 +26,10 @@ export function WizardComponent() {
         trackEvent("generate_lead", {
             form_name: "clearance_wizard",
             value: 150,
+        });
+        pushFormSuccessToDataLayer({
+            form_id: 'clearance_wizard',
+            form_name: 'Clearance Wizard'
         });
         router.push("/thank-you?type=contract&id=WIZ-" + Math.random().toString().slice(2, 8));
     };
