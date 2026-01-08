@@ -32,8 +32,8 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${orbitron.variable} antialiased bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-primary-foreground`}
       >
+        <GoogleTagManager />
         <CartProvider>
-          <GoogleTagManager />
           {children}
           <PhoneLink />
           <OfflineTracker />
