@@ -45,6 +45,11 @@ export const trackEvent = (event: TrackEventName, payload: TrackingPayload = {})
 interface FormSuccessPayload {
     form_id: string;
     form_name?: string;
+    name?: string;
+    email?: string;
+    phone?: string;
+    description?: string;
+    amount?: string | number;
 }
 
 export const pushFormSuccessToDataLayer = (payload: FormSuccessPayload) => {
@@ -55,6 +60,11 @@ export const pushFormSuccessToDataLayer = (payload: FormSuccessPayload) => {
         event: 'form_success',
         form_id: payload.form_id,
         form_name: payload.form_name,
+        name: payload.name,
+        email: payload.email,
+        phone: payload.phone,
+        description: payload.description,
+        amount: payload.amount,
         page_path: window.location.pathname,
         method: 'ajax',
         error: false,

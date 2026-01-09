@@ -56,7 +56,9 @@ export function TypeformComponent() {
             });
             pushFormSuccessToDataLayer({
                 form_id: 'customer_survey',
-                form_name: 'Customer Survey'
+                form_name: 'Customer Survey',
+                name: answers.name,
+                description: `${answers.company || ''} - ${answers.role || ''}`
             });
             router.push("/thank-you?type=contract&id=SURVEY-" + Math.random().toString().slice(2, 8));
         }

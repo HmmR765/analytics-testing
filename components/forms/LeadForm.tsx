@@ -48,7 +48,10 @@ export function LeadForm() {
         });
         pushFormSuccessToDataLayer({
             form_id: 'lead_gen_v1',
-            form_name: 'Lead Generation'
+            form_name: 'Lead Generation',
+            name: values.username,
+            email: values.email,
+            phone: values.phone
         });
         alert("Lead Submitted! Check Console or Tracking Debugger.");
     }

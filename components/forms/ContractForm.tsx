@@ -39,7 +39,10 @@ export function ContractForm() {
         const contractId = "CNT-" + Math.random().toString(36).substr(2, 9).toUpperCase();
         pushFormSuccessToDataLayer({
             form_id: 'contract_request',
-            form_name: 'Contract Request'
+            form_name: 'Contract Request',
+            name: values.codename,
+            description: values.target,
+            amount: values.bounty
         });
         router.push(`/thank-you?type=contract&id=${contractId}`);
     }
