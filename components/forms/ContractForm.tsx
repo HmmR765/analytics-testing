@@ -19,6 +19,8 @@ import { pushFormSuccessToDataLayer } from "@/lib/tracking";
 
 const formSchema = z.object({
     codename: z.string().min(2, { message: "Alias required." }),
+    email: z.string().email(),
+    phone: z.string().min(10, { message: "Invalid phone number" }),
     target: z.string().min(2, { message: "Target description required." }),
     bounty: z.string().min(1, { message: "Offer required." }),
 });
@@ -29,6 +31,8 @@ export function ContractForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             codename: "",
+            email: "",
+            phone: "",
             target: "",
             bounty: "",
         },
@@ -41,6 +45,8 @@ export function ContractForm() {
             form_id: 'contract_request',
             form_name: 'Contract Request',
             name: values.codename,
+            email: values.email,
+            phone: values.phone,
             description: values.target,
             amount: values.bounty
         });
@@ -58,6 +64,32 @@ export function ContractForm() {
                             <FormLabel className="text-secondary font-mono uppercase tracking-widest">Full Name</FormLabel>
                             <FormControl>
                                 <Input placeholder="Jane Doe" {...field} className="bg-background/50 border-secondary/30 focus:border-secondary text-foreground" />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="text-secondary font-mono uppercase tracking-widest">Email</FormLabel>
+                            <FormControl>
+                                <Input placeholder="jane@example.com" {...field} className="bg-background/50 border-secondary/30 focus:border-secondary text-foreground" />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="text-secondary font-mono uppercase tracking-widest">Phone</FormLabel>
+                            <FormControl>
+                                <Input placeholder="+1 234 567 890" {...field} className="bg-background/50 border-secondary/30 focus:border-secondary text-foreground" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -93,6 +125,7 @@ export function ContractForm() {
                     Submit Request
                 </NeonButton>
             </form>
+
         </Form>
     );
 }
