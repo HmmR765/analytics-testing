@@ -58,13 +58,15 @@ export const pushFormSuccessToDataLayer = (payload: FormSuccessPayload) => {
     window.dataLayer = window.dataLayer || [];
     const eventData = {
         event: 'form_success',
-        form_id: payload.form_id,
-        form_name: payload.form_name,
-        name: payload.name,
-        email: payload.email,
-        phone: payload.phone,
-        description: payload.description,
-        amount: payload.amount,
+        form_success: {
+            form_id: payload.form_id,
+            form_name: payload.form_name,
+            name: payload.name,
+            email: payload.email,
+            phone: payload.phone,
+            description: payload.description,
+            amount: payload.amount,
+        },
         page_path: window.location.pathname,
         method: 'ajax',
         error: false,
