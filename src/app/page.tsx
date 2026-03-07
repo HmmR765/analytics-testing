@@ -33,31 +33,8 @@ export default async function Home() {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="z-10 w-full max-w-7xl px-6 md:px-24 flex flex-col md:flex-row items-center md:items-end justify-between gap-10">
-          {/* Left: Contact Form */}
+        <div className="z-10 w-full max-w-7xl px-6 md:px-24 flex justify-end">
           <ContactForm />
-
-          {/* Right: Product Info */}
-          <div className="max-w-xl w-full space-y-10 text-center md:text-right">
-            <div className="space-y-4">
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-[0.2em] font-dot text-black uppercase leading-tight">
-                Nothing Headphone
-              </h2>
-              <p className="text-zinc-500 text-sm tracking-[0.5em] font-dot uppercase font-bold">Pure Engineering</p>
-            </div>
-
-            <div className="flex flex-col items-center md:items-end">
-              <div className="flex flex-col gap-4 w-full max-w-sm font-mono">
-                <button className="w-full px-8 py-5 bg-zinc-200/80 backdrop-blur-sm text-black rounded-lg font-bold hover:bg-zinc-300 transition-colors uppercase tracking-[0.3em] flex justify-between items-center text-[10px]">
-                  <span>Color: White</span>
-                  <span>⌄</span>
-                </button>
-                <button className="w-full px-8 py-5 bg-black text-white rounded-lg font-bold hover:bg-zinc-900 transition-colors uppercase tracking-[0.3em] text-[10px]">
-                  Flipkart
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </main>
