@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import ScrollScrubber from "@/components/ScrollScrubber"
+import ContactForm from "@/components/ContactForm"
 
 export default async function Home() {
   // Read frames count dynamically
@@ -32,18 +33,16 @@ export default async function Home() {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="z-10 w-full max-w-7xl px-6 md:px-24 flex justify-end">
-          <div className="max-w-xl w-full space-y-16 text-right">
+        <div className="z-10 w-full max-w-7xl px-6 md:px-24 flex justify-center md:justify-end">
+          <div className="max-w-xl w-full space-y-10 md:space-y-16 text-center md:text-right">
             <div className="space-y-4">
-              <h2 className="text-5xl md:text-7xl font-bold tracking-[0.2em] font-dot text-black uppercase leading-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-[0.2em] font-dot text-black uppercase leading-tight">
                 Nothing Headphone
               </h2>
               <p className="text-zinc-500 text-sm tracking-[0.5em] font-dot uppercase font-bold">Pure Engineering</p>
             </div>
 
-            <div className="flex flex-col items-end space-y-12">
-
-
+            <div className="flex flex-col items-center md:items-end space-y-12">
               <div className="flex flex-col gap-4 w-full max-w-sm font-mono pt-4">
                 <button className="w-full px-8 py-5 bg-zinc-200/80 backdrop-blur-sm text-black rounded-lg font-bold hover:bg-zinc-300 transition-colors uppercase tracking-[0.3em] flex justify-between items-center text-[10px]">
                   <span>Color: White</span>
@@ -57,6 +56,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <ContactForm />
     </main>
   );
 }
