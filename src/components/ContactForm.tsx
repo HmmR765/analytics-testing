@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("Something went wrong. Try again.");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -13,16 +14,23 @@ export default function ContactForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
+    setErrorMessage("Something went wrong. Try again.");
     try {
-      const res = await fetch("https://sandeepn8n-u51242.vm.elestio.app/webhook/outbound", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error("Failed");
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error || "Failed");
+      }
       setStatus("success");
       setForm({ name: "", phone: "", message: "" });
-    } catch {
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
       setStatus("error");
     }
   }
@@ -96,7 +104,7 @@ export default function ContactForm() {
 
           {status === "error" && (
             <p className="text-red-500 text-[10px] tracking-widest uppercase font-dot">
-              Something went wrong. Try again.
+              {errorMessage}
             </p>
           )}
 
