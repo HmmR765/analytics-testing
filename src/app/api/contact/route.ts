@@ -4,6 +4,7 @@ const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
 
 type ContactPayload = {
   name?: string;
+  email?: string;
   phone?: string;
   message?: string;
 };
@@ -29,21 +30,28 @@ export async function POST(request: Request) {
   }
 
   const name = normalizeField(payload.name);
+  const email = normalizeField(payload.email);
   const phone = normalizeField(payload.phone);
   const message = normalizeField(payload.message);
 
-  if (!name || !phone || !message) {
+  if (!name || !email || !phone || !message) {
     return NextResponse.json(
-      { error: "Name, phone, and message are required." },
+      { error: "Name, email, phone, and message are required." },
       { status: 400 },
     );
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
   }
 
   try {
     const webhookResponse = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone, message }),
+      body: JSON.stringify({ name, email, phone, message }),
       cache: "no-store",
     });
 

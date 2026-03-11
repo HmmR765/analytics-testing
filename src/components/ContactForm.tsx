@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("Something went wrong. Try again.");
 
@@ -26,7 +26,7 @@ export default function ContactForm() {
         throw new Error(data?.error || "Failed");
       }
       setStatus("success");
-      setForm({ name: "", phone: "", message: "" });
+      setForm({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -68,6 +68,21 @@ export default function ContactForm() {
               value={form.name}
               onChange={handleChange}
               placeholder="Your name"
+              className="w-full bg-zinc-900 border border-zinc-800 text-white text-sm px-4 py-3 rounded-lg outline-none focus:border-zinc-500 placeholder:text-zinc-700 transition-colors font-mono"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[10px] tracking-[0.4em] uppercase text-zinc-500 mb-2 font-dot">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              required
+              value={form.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
               className="w-full bg-zinc-900 border border-zinc-800 text-white text-sm px-4 py-3 rounded-lg outline-none focus:border-zinc-500 placeholder:text-zinc-700 transition-colors font-mono"
             />
           </div>
